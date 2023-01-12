@@ -45,7 +45,7 @@ android {
     defaultConfig {
         applicationId "com.example.dailywallet_flutter"
         minSdkVersion 23
-        targetSdkVersion 33
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
