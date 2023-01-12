@@ -196,12 +196,12 @@ packages:
     source: hosted
     version: "2.0.1"
   flutter_rust_bridge:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_rust_bridge
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.60.0"
+    version: "1.54.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
