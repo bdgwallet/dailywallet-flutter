@@ -41,6 +41,23 @@ class BDKManager extends ChangeNotifier {
     }
   }
 
+  sync() async {
+    if (wallet != null) {
+      syncState = SyncState.syncing;
+      notifyListeners();
+      try {
+        final blockchain = await Blockchain.create(config: blockchainConfig);
+        await wallet!.sync(blockchain);
+        syncState = SyncState.synced;
+        notifyListeners();
+      } on Exception catch (error) {
+        syncState = SyncState.failed;
+        notifyListeners();
+        debugPrint(error.toString());
+      }
+    }
+  }
+
   Future<List<String>> getDescriptors(Mnemonic mnemonic) async {
     final descriptors = <String>[];
     try {
