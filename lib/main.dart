@@ -48,12 +48,15 @@ class CreateWalletScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bdkManager = ref.watch(bdkManagerProvider);
     return Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-          Text("Sign in screen"),
-        ]));
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      const Text("Sign in screen"),
+      PlatformElevatedButton(
+        child: const Text("Create wallet"),
+        onPressed: () {
+          bdkManager.loadWallet();
+        },
+      ),
+    ]));
   }
 }
 
@@ -63,18 +66,11 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bdkManager = ref.watch(bdkManagerProvider);
-    ref.read(bdkManagerProvider).loadWallet();
     return Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-          Text(bdkManager.wallet != null ? "Wallet" : "No wallet"),
-          PlatformElevatedButton(
-            child: Text("Tap on this"),
-            onPressed: () {},
-          ),
-        ]));
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text(bdkManager.wallet != null ? "Wallet" : "No wallet"),
+      const Text("Wallet balance"),
+    ]));
   }
 }
 

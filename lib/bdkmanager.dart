@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:bdk_flutter/bdk_flutter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final bdkManagerProvider = ChangeNotifierProvider<BDKManager>((ref) {
+  return BDKManager(Network.Testnet);
+});
+
 class BDKManager extends ChangeNotifier {
   BDKManager(this.network);
 
@@ -55,9 +59,5 @@ class BDKManager extends ChangeNotifier {
     }
   }
 }
-
-final bdkManagerProvider = ChangeNotifierProvider<BDKManager>((ref) {
-  return BDKManager(Network.Testnet);
-});
 
 enum SyncState { empty, syncing, synced, failed }
