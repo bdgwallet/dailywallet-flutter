@@ -3,6 +3,7 @@ import 'package:dailywallet_flutter/bdkmanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() {
   runApp(
@@ -44,9 +45,17 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bdkManager = ref.watch(bdkManagerProvider);
     ref.read(bdkManagerProvider).loadWallet();
-    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Center(child: Text(bdkManager.wallet != null ? "Wallet" : "No wallet"))
-    ]);
+    return Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+          Text(bdkManager.wallet != null ? "Wallet" : "No wallet"),
+          PlatformElevatedButton(
+            child: Text("Tap on this"),
+            onPressed: () {},
+          ),
+        ]));
   }
 }
 
