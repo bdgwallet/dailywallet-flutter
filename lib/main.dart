@@ -8,21 +8,24 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 void main() {
   runApp(
     const ProviderScope(
-      child: MyApp(),
+      child: DailyWalletApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DailyWalletApp extends ConsumerWidget {
+  const DailyWalletApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bdkManager = ref.watch(bdkManagerProvider);
+
     if (Platform.isIOS) {
-      return const CupertinoApp(
+      return CupertinoApp(
         home: CupertinoPageScaffold(
-          child: HomeScreen(),
+          child: bdkManager.wallet != null
+              ? const HomeScreen()
+              : const CreateWalletScreen(),
         ),
         debugShowCheckedModeBanner: false,
       );
@@ -35,6 +38,22 @@ class MyApp extends StatelessWidget {
         home: const Scaffold(body: HomeScreen()),
       );
     }
+  }
+}
+
+class CreateWalletScreen extends ConsumerWidget {
+  const CreateWalletScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bdkManager = ref.watch(bdkManagerProvider);
+    return Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+          Text("Sign in screen"),
+        ]));
   }
 }
 
