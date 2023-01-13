@@ -1,9 +1,10 @@
 import 'dart:io' show Platform;
-import 'package:dailywallet_flutter/bdkmanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:bdk_flutter/bdk_flutter.dart';
+import 'package:dailywallet_flutter/bdkmanager.dart';
 
 void main() {
   runApp(
@@ -35,7 +36,10 @@ class DailyWalletApp extends ConsumerWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const Scaffold(body: HomeScreen()),
+        home: Scaffold(
+            body: bdkManager.wallet != null
+                ? const HomeScreen()
+                : const CreateWalletScreen()),
       );
     }
   }
@@ -53,7 +57,11 @@ class CreateWalletScreen extends ConsumerWidget {
       PlatformElevatedButton(
         child: const Text("Create wallet"),
         onPressed: () {
-          bdkManager.loadWallet();
+          Mnemonic.create(WordCount.Words12).then((mnemonic) {
+            bdkManager.getDescriptors(mnemonic).then((descriptors) {
+              bdkManager.loadWallet(descriptors[0], descriptors[1]);
+            });
+          });
         },
       ),
     ]));
