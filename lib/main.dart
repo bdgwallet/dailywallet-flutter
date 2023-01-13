@@ -1,5 +1,6 @@
-import 'package:bdk_flutter/bdk_flutter.dart';
+import 'dart:io' show Platform;
 import 'package:dailywallet_flutter/bdkmanager.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,19 +12,28 @@ void main() {
   );
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomeScreen(),
-    );
+  Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return const CupertinoApp(
+        home: CupertinoPageScaffold(
+          child: HomeScreen(),
+        ),
+        debugShowCheckedModeBanner: false,
+      );
+    } else {
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const Scaffold(body: HomeScreen()),
+      );
+    }
   }
 }
 
@@ -34,9 +44,9 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bdkManager = ref.watch(bdkManagerProvider);
     ref.read(bdkManagerProvider).loadWallet();
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [Text(bdkManager.wallet != null ? "Wallet" : "No wallet")]);
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Center(child: Text(bdkManager.wallet != null ? "Wallet" : "No wallet"))
+    ]);
   }
 }
 
