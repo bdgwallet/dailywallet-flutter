@@ -1,3 +1,5 @@
+import 'package:bdk_flutter/bdk_flutter.dart';
+import 'package:dailywallet_flutter/bdkmanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,8 +22,21 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomeScreen(),
     );
+  }
+}
+
+class HomeScreen extends ConsumerWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bdkManager = ref.watch(bdkManagerProvider);
+    ref.read(bdkManagerProvider).loadWallet();
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [Text(bdkManager.wallet != null ? "Wallet" : "No wallet")]);
   }
 }
 
