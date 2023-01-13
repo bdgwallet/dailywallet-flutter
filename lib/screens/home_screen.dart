@@ -109,39 +109,18 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bdkManager = ref.watch(bdkManagerProvider);
-    if (Platform.isIOS) {
-      return CupertinoPageScaffold(
-        navigationBar: const CupertinoNavigationBar(
-          backgroundColor: Colors.transparent,
-          border: null,
-          heroTag: "Settings",
-          transitionBetweenRoutes: false,
-          middle: Text(
-            "Settings",
-          ),
-        ),
-        child: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-              Text("Settings screen"),
-            ])),
-      );
-    } else {
-      return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0.0,
-            title: const Center(
-              child: Text("Settings"),
-            ),
-          ),
-          body: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                Text("Settings screen"),
-              ])));
-    }
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
+        title: const Text("Settings"),
+        cupertino: (context, platform) =>
+            CupertinoNavigationBarData(backgroundColor: Colors.transparent),
+      ),
+      body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+            Text("Settings screen"),
+          ])),
+    );
   }
 }
