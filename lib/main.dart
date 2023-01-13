@@ -33,7 +33,7 @@ class DailyWalletApp extends ConsumerWidget {
     } else {
       return MaterialApp(
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
         ),
         home: Scaffold(
             body: bdkManager.wallet != null
