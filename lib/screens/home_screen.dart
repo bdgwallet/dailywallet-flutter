@@ -13,64 +13,43 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentTabIndex = 0;
+  int _tabSelectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
-      return CupertinoTabScaffold(
-          tabBar: CupertinoTabBar(
-              backgroundColor: Colors.transparent,
-              activeColor: Colors.orange,
-              border: null,
-              items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.home), label: "Payments"),
-                BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.search), label: "Activity"),
-                BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.settings), label: "Settings")
-              ]),
-          tabBuilder: (context, index) {
-            switch (index) {
-              case 0:
-                return const TransactionScreen();
-              case 1:
-                return const ActivityScreen();
-              case 2:
-                return const SettingsScreen();
-              default:
-                return const TransactionScreen();
-            }
-          });
-    } else {
-      List<Widget> tabs = [
-        const TransactionScreen(),
-        const ActivityScreen(),
-        const SettingsScreen(),
-      ];
-      onTapped(int index) {
-        setState(() {
-          currentTabIndex = index;
-        });
-      }
+    return PlatformScaffold(
+      body: getTabScreen(_tabSelectedIndex),
+      bottomNavBar: PlatformNavBar(
+          backgroundColor: Colors.white,
+          cupertino: (context, platform) => CupertinoTabBarData(
+              border: Border.all(width: 0, color: Colors.transparent)),
+          material: (context, platform) => MaterialNavBarData(elevation: 0.0),
+          currentIndex: _tabSelectedIndex,
+          itemChanged: (index) {
+            setState(() {
+              _tabSelectedIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.home), label: "Payments"),
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.search), label: "Activity"),
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.settings), label: "Settings")
+          ]),
+    );
+  }
+}
 
-      return Scaffold(
-        body: tabs[currentTabIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: currentTabIndex,
-            onTap: onTapped,
-            elevation: 0.0,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home), label: "Payments"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.search), label: "Activity"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.settings), label: "Settings")
-            ]),
-      );
-    }
+Widget getTabScreen(int tabIndex) {
+  switch (tabIndex) {
+    case 1:
+      return const ActivityScreen();
+    case 2:
+      return const SettingsScreen();
+    default:
+      return const TransactionScreen();
   }
 }
 
