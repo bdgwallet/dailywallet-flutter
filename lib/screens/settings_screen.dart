@@ -12,10 +12,11 @@ class SettingsScreen extends ConsumerWidget {
     final bdkManager = ref.watch(bdkManagerProvider);
     return PlatformScaffold(
       appBar: PlatformAppBar(
-        title: const Text("Settings"),
-        cupertino: (context, platform) =>
-            CupertinoNavigationBarData(backgroundColor: Colors.transparent),
-      ),
+          title: const Text("Settings"),
+          cupertino: (context, platform) =>
+              CupertinoNavigationBarData(backgroundColor: Colors.transparent),
+          material: ((context, platform) => MaterialAppBarData(
+              backgroundColor: Colors.transparent, elevation: 0.1))),
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
