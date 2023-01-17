@@ -1,34 +1,27 @@
-import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:dailywallet_flutter/bdkmanager.dart';
+import 'package:dailywallet_flutter/screens/transaction_screen.dart';
+import 'package:dailywallet_flutter/screens/activity_screen.dart';
+import 'package:dailywallet_flutter/screens/settings_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _tabSelectedIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tabState = ref.watch(tabStateProvider);
     return PlatformScaffold(
-      body: getTabScreen(_tabSelectedIndex),
+      body: tabState.tabScreen(),
       bottomNavBar: PlatformNavBar(
           backgroundColor: Colors.white,
           cupertino: (context, platform) => CupertinoTabBarData(
               border: Border.all(width: 0, color: Colors.transparent)),
           material: (context, platform) => MaterialNavBarData(elevation: 0.0),
-          currentIndex: _tabSelectedIndex,
+          currentIndex: tabState.selectedTab,
           itemChanged: (index) {
-            setState(() {
-              _tabSelectedIndex = index;
-            });
+            tabState.updateIndex(index);
           },
           items: const [
             BottomNavigationBarItem(
@@ -42,64 +35,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Widget getTabScreen(int tabIndex) {
-  switch (tabIndex) {
-    case 1:
-      return const ActivityScreen();
-    case 2:
-      return const SettingsScreen();
-    default:
-      return const TransactionScreen();
+final tabStateProvider = ChangeNotifierProvider<TabState>((ref) {
+  return TabState();
+});
+
+class TabState extends ChangeNotifier {
+  int selectedTab = 0;
+
+  void updateIndex(int index) {
+    selectedTab = index;
+    notifyListeners();
   }
-}
 
-class TransactionScreen extends ConsumerWidget {
-  const TransactionScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final bdkManager = ref.watch(bdkManagerProvider);
-    return Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text(bdkManager.syncState.toString()),
-      const Text("Wallet balance"),
-    ]));
-  }
-}
-
-class ActivityScreen extends ConsumerWidget {
-  const ActivityScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final bdkManager = ref.watch(bdkManagerProvider);
-    return Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-          Text("Activity screen"),
-        ]));
-  }
-}
-
-class SettingsScreen extends ConsumerWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final bdkManager = ref.watch(bdkManagerProvider);
-    return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: const Text("Settings"),
-        cupertino: (context, platform) =>
-            CupertinoNavigationBarData(backgroundColor: Colors.transparent),
-      ),
-      body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-            Text("Settings screen"),
-          ])),
-    );
+  Widget tabScreen() {
+    switch (selectedTab) {
+      case 1:
+        return const ActivityScreen();
+      case 2:
+        return const SettingsScreen();
+      default:
+        return const TransactionScreen();
+    }
   }
 }
