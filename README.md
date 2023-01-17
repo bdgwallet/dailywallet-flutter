@@ -1,4 +1,4 @@
-# BDG Daily Wallet in Flutter
+# BDG Daily Wallet - Flutter
 
 A bitcoin wallet app template for Flutter.
 
