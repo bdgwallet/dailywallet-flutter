@@ -25,10 +25,11 @@ class BDKManager extends ChangeNotifier {
             retry: 5,
             url: network == Network.Bitcoin
                 ? ELECTRUM_URL_BITCOIN
-                : ELECTRUM_URL_TESTNET));
+                : ELECTRUM_URL_TESTNET,
+            validateDomain: true));
   }
 
-  loadWallet(String descriptor, String? changeDescriptor) async {
+  loadWallet(Descriptor descriptor, Descriptor? changeDescriptor) async {
     try {
       wallet = await Wallet.create(
           descriptor: descriptor,

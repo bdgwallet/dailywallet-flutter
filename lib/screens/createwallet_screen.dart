@@ -17,11 +17,17 @@ class CreateWalletScreen extends ConsumerWidget {
         child: const Text("Create wallet"),
         onPressed: () {
           Mnemonic.create(WordCount.Words12).then((mnemonic) {
-            bdkManager.getDescriptors(mnemonic).then((descriptors) {
-              bdkManager
-                  .loadWallet(descriptors[0], descriptors[1])
-                  .then((result) {
-                bdkManager.sync();
+            DescriptorSecretKey.create(
+                    network: bdkManager.network, mnemonic: mnemonic)
+                .then((descriptorSecretKey) {
+              Descriptor.newBip44(
+                      descriptorSecretKey: descriptorSecretKey,
+                      network: bdkManager.network,
+                      keyChainKind: KeychainKind.External)
+                  .then((descriptor) {
+                bdkManager.loadWallet(descriptor, null).then((result) {
+                  bdkManager.sync();
+                });
               });
             });
           });
