@@ -20,10 +20,10 @@ class CreateWalletScreen extends ConsumerWidget {
             DescriptorSecretKey.create(
                     network: bdkManager.network, mnemonic: mnemonic)
                 .then((descriptorSecretKey) {
-              Descriptor.newBip44(
-                      descriptorSecretKey: descriptorSecretKey,
+              Descriptor.newBip84(
+                      secretKey: descriptorSecretKey,
                       network: bdkManager.network,
-                      keyChainKind: KeychainKind.External)
+                      keychain: KeychainKind.External)
                   .then((descriptor) {
                 bdkManager.loadWallet(descriptor, null).then((result) {
                   bdkManager.sync();
