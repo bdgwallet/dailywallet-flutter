@@ -13,7 +13,7 @@ class CreateWalletScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bdkManager = ref.watch(bdkManagerProvider);
-    final keyManager = ref.watch(keyManagerProvider);
+
     return Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       const Text("Sign in screen"),
@@ -32,7 +32,7 @@ class CreateWalletScreen extends ConsumerWidget {
                 descriptor.asString().then((descriptorString) {
                   final keydata =
                       KeyData(mnemonic.asString(), descriptorString);
-                  keyManager.saveKeyData(keydata);
+                  saveKeyData(keydata);
                   bdkManager.loadWallet(descriptor, null).then((result) {
                     bdkManager.sync();
                   });

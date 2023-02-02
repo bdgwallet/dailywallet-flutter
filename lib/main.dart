@@ -22,7 +22,6 @@ class DailyWalletApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final keyManager = ref.watch(keyManagerProvider);
     final bdkManager = ref.watch(bdkManagerProvider);
 
     init(ref);
@@ -38,18 +37,16 @@ class DailyWalletApp extends ConsumerWidget {
 }
 
 void init(WidgetRef ref) async {
-  final keyManager = ref.watch(keyManagerProvider);
   final bdkManager = ref.watch(bdkManagerProvider);
 
-  if (keyManager.keydata != null) {
+  getKeyData().then((keydata) {
     Descriptor.create(
-            descriptor: keyManager.keydata!.descriptor,
-            network: bdkManager.network)
+            descriptor: keydata.descriptor, network: bdkManager.network)
         .then((descriptor) {
       bdkManager.loadWallet(descriptor, null).then((result) {
         bdkManager.sync();
         return true;
       });
     });
-  }
+  });
 }
