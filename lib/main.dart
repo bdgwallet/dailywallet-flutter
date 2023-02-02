@@ -24,29 +24,37 @@ class DailyWalletApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bdkManager = ref.watch(bdkManagerProvider);
 
-    init(ref);
-
     return PlatformApp(
         debugShowCheckedModeBanner: false,
         home: PlatformScaffold(
-          body: bdkManager.wallet != null
-              ? const HomeScreen()
-              : const CreateWalletScreen(),
-        ));
+            body: bdkManager.wallet != null
+                ? const HomeScreen()
+                : FutureBuilder(
+                    future: checkForExistingWallet(ref),
+                    builder: ((context, snapshot) {
+                      if (snapshot.hasData) {
+                        return snapshot.data != false
+                            ? const HomeScreen()
+                            : const CreateWalletScreen();
+                      } else {
+                        return PlatformCircularProgressIndicator();
+                      }
+                    }))));
   }
 }
 
-void init(WidgetRef ref) async {
+Future<bool> checkForExistingWallet(WidgetRef ref) async {
   final bdkManager = ref.watch(bdkManagerProvider);
 
-  getKeyData().then((keydata) {
-    Descriptor.create(
+  await getKeyData().then((keydata) async {
+    await Descriptor.create(
             descriptor: keydata.descriptor, network: bdkManager.network)
-        .then((descriptor) {
-      bdkManager.loadWallet(descriptor, null).then((result) {
+        .then((descriptor) async {
+      await bdkManager.loadWallet(descriptor, null).then((result) {
         bdkManager.sync();
         return true;
       });
     });
   });
+  return false;
 }
