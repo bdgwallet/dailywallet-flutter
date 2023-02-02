@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
 import 'package:bdk_flutter/bdk_flutter.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:dailywallet_flutter/bdkmanager.dart';
+import 'package:dailywallet_flutter/keymanager.dart';
 
 class CreateWalletScreen extends ConsumerWidget {
   const CreateWalletScreen({super.key});
@@ -10,6 +13,7 @@ class CreateWalletScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bdkManager = ref.watch(bdkManagerProvider);
+    final keyManager = ref.watch(keyManagerProvider);
     return Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       const Text("Sign in screen"),
@@ -25,8 +29,13 @@ class CreateWalletScreen extends ConsumerWidget {
                       network: bdkManager.network,
                       keychain: KeychainKind.External)
                   .then((descriptor) {
-                bdkManager.loadWallet(descriptor, null).then((result) {
-                  bdkManager.sync();
+                descriptor.asString().then((descriptorString) {
+                  final keydata =
+                      KeyData(mnemonic.asString(), descriptorString);
+                  keyManager.saveKeyData(keydata);
+                  bdkManager.loadWallet(descriptor, null).then((result) {
+                    bdkManager.sync();
+                  });
                 });
               });
             });
