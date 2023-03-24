@@ -37,7 +37,8 @@ class DailyWalletApp extends ConsumerWidget {
                             ? const HomeScreen()
                             : const CreateWalletScreen();
                       } else {
-                        return PlatformCircularProgressIndicator();
+                        return Center(
+                            child: PlatformCircularProgressIndicator());
                       }
                     }))));
   }
@@ -46,15 +47,19 @@ class DailyWalletApp extends ConsumerWidget {
 Future<bool> checkForExistingWallet(WidgetRef ref) async {
   final bdkManager = ref.watch(bdkManagerProvider);
 
-  await getKeyData().then((keydata) async {
-    await Descriptor.create(
-            descriptor: keydata.descriptor, network: bdkManager.network)
-        .then((descriptor) async {
-      await bdkManager.loadWallet(descriptor, null).then((result) {
-        bdkManager.sync();
-        return true;
+  try {
+    await getKeyData().then((keydata) async {
+      await Descriptor.create(
+              descriptor: keydata.descriptor, network: bdkManager.network)
+          .then((descriptor) async {
+        await bdkManager.loadWallet(descriptor, null).then((result) {
+          bdkManager.sync();
+          return true;
+        });
       });
     });
-  });
+  } catch (error) {
+    debugPrint(error.toString());
+  }
   return false;
 }
