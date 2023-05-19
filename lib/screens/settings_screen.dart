@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:dailywallet_flutter/bdkmanager.dart';
+import 'package:bitcoin_ui_kit/bitcoin_ui_kit.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -18,11 +19,13 @@ class SettingsScreen extends ConsumerWidget {
           material: ((context, platform) => MaterialAppBarData(
               backgroundColor: Colors.transparent, elevation: 0.1))),
       body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-            Text("Settings screen"),
-          ])),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        const Text("Settings screen"),
+        Image(
+            image: const AssetImage("icons/bitcoin_circle_filled.png",
+                package: "bitcoin_ui_kit"),
+            color: BitcoinUIKitColor.orange),
+      ])),
     );
   }
 }

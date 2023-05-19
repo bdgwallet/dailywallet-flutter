@@ -43,6 +43,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.1"
+  bitcoin_ui_kit:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: ec03e045caafc471f9b0386fc0d453ed19ca70bd
+      url: "https://github.com/bdgwallet/bitcoinuikit-flutter.git"
+    source: git
+    version: "0.0.1"
   boolean_selector:
     dependency: transitive
     description:
