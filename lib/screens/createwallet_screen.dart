@@ -4,7 +4,6 @@ import 'package:dailywallet_flutter/ldknodemanager.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:dailywallet_flutter/bdkmanager.dart';
 import 'package:dailywallet_flutter/keymanager.dart';
 
 class CreateWalletScreen extends ConsumerWidget {
