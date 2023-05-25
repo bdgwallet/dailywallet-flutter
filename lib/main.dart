@@ -1,10 +1,9 @@
-import 'package:bdk_flutter/bdk_flutter.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:dailywallet_flutter/bdkmanager.dart';
+import 'package:dailywallet_flutter/ldknodemanager.dart';
 import 'package:dailywallet_flutter/keymanager.dart';
 import 'package:dailywallet_flutter/screens/createwallet_screen.dart';
 import 'package:dailywallet_flutter/screens/home_screen.dart';
@@ -22,12 +21,12 @@ class DailyWalletApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bdkManager = ref.watch(bdkManagerProvider);
+    final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
 
     return PlatformApp(
         debugShowCheckedModeBanner: false,
         home: PlatformScaffold(
-            body: bdkManager.wallet != null
+            body: ldkNodeManager.node != null
                 ? const HomeScreen()
                 : FutureBuilder(
                     future: checkForExistingWallet(ref),
@@ -45,19 +44,19 @@ class DailyWalletApp extends ConsumerWidget {
 }
 
 Future<bool> checkForExistingWallet(WidgetRef ref) async {
-  final bdkManager = ref.watch(bdkManagerProvider);
+  final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
 
   try {
-    await getKeyData().then((keydata) async {
-      await Descriptor.create(
-              descriptor: keydata.descriptor, network: bdkManager.network)
-          .then((descriptor) async {
-        await bdkManager.loadWallet(descriptor, null).then((result) {
-          bdkManager.sync();
-          return true;
-        });
-      });
-    });
+    // await getKeyData().then((keydata) async {
+    //   await Descriptor.create(
+    //           descriptor: keydata.descriptor, network: bdkManager.network)
+    //       .then((descriptor) async {
+    //     await bdkManager.loadWallet(descriptor, null).then((result) {
+    //       bdkManager.sync();
+    //       return true;
+    //     });
+    //   });
+    // });
   } catch (error) {
     debugPrint(error.toString());
   }

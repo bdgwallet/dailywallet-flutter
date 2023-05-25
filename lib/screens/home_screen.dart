@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+import 'package:dailywallet_flutter/ldknodemanager.dart';
 import 'package:dailywallet_flutter/screens/transaction_screen.dart';
 import 'package:dailywallet_flutter/screens/activity_screen.dart';
 import 'package:dailywallet_flutter/screens/settings_screen.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabState = ref.watch(tabStateProvider);
+    final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
 
     return PlatformScaffold(
       body: tabState.tabScreen(),

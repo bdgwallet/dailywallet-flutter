@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:dailywallet_flutter/bdkmanager.dart';
+import 'package:dailywallet_flutter/ldknodemanager.dart';
 import 'package:bitcoin_ui_kit/bitcoin_ui_kit.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -10,7 +10,7 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bdkManager = ref.watch(bdkManagerProvider);
+    final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
     return PlatformScaffold(
       appBar: PlatformAppBar(
           title: const Text("Settings"),
