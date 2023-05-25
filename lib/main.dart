@@ -45,18 +45,11 @@ class DailyWalletApp extends ConsumerWidget {
 
 Future<bool> checkForExistingWallet(WidgetRef ref) async {
   final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
-
   try {
-    // await getKeyData().then((keydata) async {
-    //   await Descriptor.create(
-    //           descriptor: keydata.descriptor, network: bdkManager.network)
-    //       .then((descriptor) async {
-    //     await bdkManager.loadWallet(descriptor, null).then((result) {
-    //       bdkManager.sync();
-    //       return true;
-    //     });
-    //   });
-    // });
+    await getKeyData().then((keydata) async {
+      ldkNodeManager.start(keydata.mnemonic);
+    });
+    return true;
   } catch (error) {
     debugPrint(error.toString());
   }

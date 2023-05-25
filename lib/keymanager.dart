@@ -5,8 +5,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class KeyData {
   String mnemonic;
-  String descriptor;
-  KeyData(this.mnemonic, this.descriptor);
+  String? descriptor;
+  KeyData(this.mnemonic, [this.descriptor]);
 
   factory KeyData.fromJson(Map<String, dynamic> json) {
     return KeyData(json['mnemonic'], json['descriptor']);

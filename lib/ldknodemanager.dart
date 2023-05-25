@@ -18,7 +18,7 @@ class LDKNodeManager extends ChangeNotifier {
     network = network;
   }
 
-  start() async {
+  start(String mnemonic) async {
     try {
       final nodeConfig = LDK.Config(
           storageDirPath: await appDirectoryPath(),
@@ -29,6 +29,7 @@ class LDKNodeManager extends ChangeNotifier {
           listeningAddress: DEFAULT_LISTENING_ADDRESS,
           defaultCltvExpiryDelta: DEFAULT_CLTV_EXPIRY_DELTA);
       LDK.Builder builder = LDK.Builder.fromConfig(config: nodeConfig);
+      builder.setEntropyBip39Mnemonic(mnemonic: mnemonic);
       node = await builder.build();
       await node?.start();
       notifyListeners();
