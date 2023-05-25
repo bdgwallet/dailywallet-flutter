@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:dailywallet_flutter/ldknodemanager.dart';
+import 'package:dailywallet_flutter/ldknode_manager.dart';
 
 class ActivityScreen extends ConsumerWidget {
   const ActivityScreen({super.key});
