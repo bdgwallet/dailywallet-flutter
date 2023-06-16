@@ -12,14 +12,14 @@ dependencies:
   flutter:
     sdk: flutter
   bdk_flutter: ^0.28.0
-  cupertino_icons: ^1.0.2
-  flutter_platform_widgets: ^2.1.0
-  flutter_riverpod: ^2.1.3
-  flutter_secure_storage: ^7.0.1
   bitcoin_ui_kit:
     git:
       url: https://github.com/bdgwallet/bitcoinuikit-flutter.git
       ref: main
+  cupertino_icons: ^1.0.2
+  flutter_platform_widgets: ^2.1.0
+  flutter_riverpod: ^2.1.3
+  flutter_secure_storage: ^7.0.1
   ldk_node: ^0.1.0
   path_provider: ^2.0.15
 

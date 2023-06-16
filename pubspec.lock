@@ -48,10 +48,10 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: ec03e045caafc471f9b0386fc0d453ed19ca70bd
+      resolved-ref: "40ed792443e9d52b9794b0f207dee32a43a50c1c"
       url: "https://github.com/bdgwallet/bitcoinuikit-flutter.git"
     source: git
-    version: "0.0.1"
+    version: "1.0.2"
   boolean_selector:
     dependency: transitive
     description:

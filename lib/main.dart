@@ -5,7 +5,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:dailywallet_flutter/key_manager.dart';
-import 'package:dailywallet_flutter/screens/createwallet_screen.dart';
+import 'package:dailywallet_flutter/screens/onboarding/start_screen.dart';
 import 'package:dailywallet_flutter/screens/home_screen.dart';
 
 void main() {
@@ -25,8 +25,10 @@ class DailyWalletApp extends ConsumerWidget {
 
     return PlatformApp(
         debugShowCheckedModeBanner: false,
-        home: PlatformScaffold(
-            body: ldkNodeManager.node != null
+        material: (context, platform) => MaterialAppData(),
+        cupertino: (context, platform) => CupertinoAppData(),
+        home: PlatformScaffold(body: const StartScreen()
+            /* ldkNodeManager.node != null
                 ? const HomeScreen()
                 : FutureBuilder(
                     future: checkForExistingWallet(ref),
@@ -39,7 +41,8 @@ class DailyWalletApp extends ConsumerWidget {
                         return Center(
                             child: PlatformCircularProgressIndicator());
                       }
-                    }))));
+                    })) */
+            ));
   }
 }
 

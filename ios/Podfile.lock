@@ -1,4 +1,6 @@
 PODS:
+  - bdk_flutter (0.28.0):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_secure_storage (6.0.0):
     - Flutter
@@ -9,12 +11,15 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
+  - bdk_flutter (from `.symlinks/plugins/bdk_flutter/ios`)
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - ldk_node (from `.symlinks/plugins/ldk_node/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
 
 EXTERNAL SOURCES:
+  bdk_flutter:
+    :path: ".symlinks/plugins/bdk_flutter/ios"
   Flutter:
     :path: Flutter
   flutter_secure_storage:
@@ -25,6 +30,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
 
 SPEC CHECKSUMS:
+  bdk_flutter: 8a13a2d82e420d6275f629ef7fd32687caf2f520
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   ldk_node: 226942afc22db35910994c9a241a29e82910aefe

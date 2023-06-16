@@ -5,6 +5,7 @@ import 'package:bitcoin_ui_kit/bitcoin_ui_kit.dart';
 import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:dailywallet_flutter/screens/onboarding/createwallet_screen.dart';
 import 'package:dailywallet_flutter/key_manager.dart';
 
 class StartScreen extends ConsumerWidget {
@@ -38,11 +39,10 @@ class StartScreen extends ConsumerWidget {
           BitcoinButtonFilled(
             title: "Create wallet",
             onPressed: () {
-              Mnemonic.create(WordCount.Words12).then((mnemonic) {
-                final keydata = KeyData(mnemonic.asString());
-                saveKeyData(keydata);
-                ldkNodeManager.start(mnemonic.asString());
-              });
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CreateWalletScreen()));
             },
           ),
           const SizedBox(height: 16),
