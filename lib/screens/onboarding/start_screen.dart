@@ -6,6 +6,7 @@ import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:dailywallet_flutter/screens/onboarding/createwallet_screen.dart';
+import 'package:dailywallet_flutter/screens/onboarding/restorewallet_screen.dart';
 import 'package:dailywallet_flutter/key_manager.dart';
 
 class StartScreen extends ConsumerWidget {
@@ -49,8 +50,10 @@ class StartScreen extends ConsumerWidget {
           BitcoinButtonPlain(
             title: "Restore wallet",
             onPressed: () {
-              // TODO: Restore flow
-              debugPrint("Restore wallet: Not yet implemented");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RestoreWalletScreen()));
             },
           ),
           const SizedBox(height: 16),
