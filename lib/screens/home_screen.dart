@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bitcoin_icons/bitcoin_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -30,11 +31,11 @@ class HomeScreen extends ConsumerWidget {
           },
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.home), label: "Payments"),
+                icon: Icon(BitcoinIcons.flip_vertical), label: "Payments"),
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.search), label: "Activity"),
+                icon: Icon(BitcoinIcons.transactions), label: "Activity"),
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.settings), label: "Settings")
+                icon: Icon(BitcoinIcons.gear), label: "Settings")
           ]),
     );
   }

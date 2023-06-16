@@ -12,6 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
   bdk_flutter: ^0.28.0
+  bitcoin_icons:
+    git:
+      url: https://github.com/danielnordh/bitcoin_icons.git
+      ref: patch-1
   bitcoin_ui_kit:
     git:
       url: https://github.com/bdgwallet/bitcoinuikit-flutter.git
