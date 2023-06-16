@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:bdk_flutter/bdk_flutter.dart';
 import 'package:bitcoin_ui_kit/bitcoin_ui_kit.dart';
 import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:dailywallet_flutter/screens/onboarding/createwallet_screen.dart';
 import 'package:dailywallet_flutter/screens/onboarding/restorewallet_screen.dart';
-import 'package:dailywallet_flutter/key_manager.dart';
 
 class StartScreen extends ConsumerWidget {
   const StartScreen({super.key});
