@@ -27,8 +27,8 @@ class DailyWalletApp extends ConsumerWidget {
         debugShowCheckedModeBanner: false,
         material: (context, platform) => MaterialAppData(),
         cupertino: (context, platform) => CupertinoAppData(),
-        home: PlatformScaffold(body: const StartScreen()
-            /* ldkNodeManager.node != null
+        home: PlatformScaffold(
+            body: ldkNodeManager.node != null
                 ? const HomeScreen()
                 : FutureBuilder(
                     future: checkForExistingWallet(ref),
@@ -36,13 +36,12 @@ class DailyWalletApp extends ConsumerWidget {
                       if (snapshot.hasData) {
                         return snapshot.data != false
                             ? const HomeScreen()
-                            : const CreateWalletScreen();
+                            : const StartScreen();
                       } else {
                         return Center(
                             child: PlatformCircularProgressIndicator());
                       }
-                    })) */
-            ));
+                    }))));
   }
 }
 
