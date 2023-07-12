@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -22,9 +21,13 @@ class SettingsScreen extends ConsumerWidget {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         const Text("Settings screen"),
         Image(
-            image: const AssetImage("icons/bitcoin_circle_filled.png",
+            image: const AssetImage("icons/bitcoin_circle.png",
                 package: "bitcoin_ui_kit"),
-            color: BitcoinUIKitColor.orange),
+            color: Bitcoin.orange),
+        Image(
+            image: const AssetImage("icons/lightning.png",
+                package: "bitcoin_ui_kit"),
+            color: Bitcoin.orange),
       ])),
     );
   }
