@@ -6,7 +6,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.5 <3.0.0"
+  sdk: ">=2.18.5 <4.0.0"
 
 dependencies:
   flutter:
@@ -21,10 +21,13 @@ dependencies:
       url: https://github.com/bdgwallet/bitcoinuikit-flutter.git
       ref: main
   cupertino_icons: ^1.0.2
-  flutter_platform_widgets: ^2.1.0
+  flutter_platform_widgets: ^3.3.5
   flutter_riverpod: ^2.1.3
   flutter_secure_storage: ^7.0.1
-  ldk_node: ^0.1.0
+  ldk_node:
+    git:
+      url: https://github.com/LtbLightning/ldk-node-flutter
+      ref: main
   path_provider: ^2.0.15
 
 dependency_overrides:

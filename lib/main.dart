@@ -31,10 +31,10 @@ class DailyWalletApp extends ConsumerWidget {
             body: ldkNodeManager.node != null
                 ? const HomeScreen()
                 : FutureBuilder(
-                    future: checkForExistingWallet(ref),
+                    future: existingWallet(ref),
                     builder: ((context, snapshot) {
                       if (snapshot.hasData) {
-                        return snapshot.data != false
+                        return snapshot.data == true
                             ? const HomeScreen()
                             : const StartScreen();
                       } else {
@@ -45,11 +45,12 @@ class DailyWalletApp extends ConsumerWidget {
   }
 }
 
-Future<bool> checkForExistingWallet(WidgetRef ref) async {
+Future<bool> existingWallet(WidgetRef ref) async {
   final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
+  await deleteKeyData();
   try {
     await getKeyData().then((keydata) async {
-      ldkNodeManager.start(keydata.mnemonic);
+      //ldkNodeManager.start(keydata.mnemonic);
     });
     return true;
   } catch (error) {

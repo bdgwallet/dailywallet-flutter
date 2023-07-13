@@ -49,6 +49,15 @@ Future<KeyData> getKeyData() async {
   }
 }
 
+// WARNING, only use while testing
+Future<bool> deleteKeyData() async {
+  final storage =
+      FlutterSecureStorage(aOptions: androidOptions, iOptions: iosOptions);
+  debugPrint("Delete keydata!");
+  await storage.delete(key: "keydata");
+  return true;
+}
+
 // Secure storage options
 
 AndroidOptions androidOptions = const AndroidOptions(

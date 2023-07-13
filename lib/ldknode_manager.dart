@@ -1,41 +1,59 @@
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:ldk_node/ldk_node.dart' as LDK;
+import 'package:ldk_node/ldk_node.dart' as ldk_node;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final ldkNodeManagerProvider = ChangeNotifierProvider<LDKNodeManager>((ref) {
-  return LDKNodeManager(LDK.Network.Testnet); // Set to .Bitcoin or .Testnet
+  return LDKNodeManager(
+      ldk_node.Network.testnet); // Set to .Bitcoin or .Testnet
 });
 
 class LDKNodeManager extends ChangeNotifier {
-  late LDK.Network network;
-  LDK.Node? node;
+  late ldk_node.Network network;
+  ldk_node.Node? node;
   var syncState = SyncState.empty;
 
   LDKNodeManager(this.network) {
     network = network;
   }
 
-  start(String mnemonic) async {
+  Future<bool> start(ldk_node.Mnemonic mnemonic) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final nodePath = "${directory.path}/ldk_cache/";
     try {
-      final nodeConfig = LDK.Config(
-          storageDirPath: await appDirectoryPath(),
-          esploraServerUrl: network == LDK.Network.Bitcoin
-              ? ESPLORA_URL_BITCOIN
-              : ESPLORA_URL_TESTNET,
+      final nodeConfig = ldk_node.Config(
+          trustedPeers0Conf: [],
+          storageDirPath: nodePath,
+          network: ldk_node.Network.testnet,
+          listeningAddress:
+              const ldk_node.NetAddress.iPv4(addr: "0.0.0.0", port: 3006),
+          onchainWalletSyncIntervalSecs: 60,
+          walletSyncIntervalSecs: 20,
+          feeRateCacheUpdateIntervalSecs: 600,
+          logLevel: ldk_node.LogLevel.debug,
+          defaultCltvExpiryDelta: 144
+          /* storageDirPath: await appDirectoryPath(),
           network: network,
-          listeningAddress: DEFAULT_LISTENING_ADDRESS,
-          defaultCltvExpiryDelta: DEFAULT_CLTV_EXPIRY_DELTA);
-      LDK.Builder builder = LDK.Builder.fromConfig(config: nodeConfig);
+          onchainWalletSyncIntervalSecs: 30,
+          walletSyncIntervalSecs: 30,
+          feeRateCacheUpdateIntervalSecs: 100,
+          logLevel: ldk_node.LogLevel.info,
+          defaultCltvExpiryDelta: 144,
+          trustedPeers0Conf: [] */
+          );
+      ldk_node.Builder builder =
+          ldk_node.Builder.fromConfig(config: nodeConfig);
       builder.setEntropyBip39Mnemonic(mnemonic: mnemonic);
       node = await builder.build();
       await node?.start();
       notifyListeners();
       sync();
+      return Future.value(true);
     } on Exception catch (error) {
       debugPrint(error.toString());
+      return Future.value(false);
     }
   }
 
@@ -71,5 +89,6 @@ const ESPLORA_URL_TESTNET = "https://blockstream.info/testnet/api";
 const ELECTRUM_URL_BITCOIN = "ssl://electrum.blockstream.info:60001";
 const ELECTRUM_URL_TESTNET = "ssl://electrum.blockstream.info:60002";
 
-const DEFAULT_LISTENING_ADDRESS = LDK.SocketAddr(ip: "0.0.0.0", port: 9735);
+const DEFAULT_LISTENING_ADDRESS =
+    ldk_node.NetAddress.iPv4(addr: "0.0.0.0", port: 3006);
 const DEFAULT_CLTV_EXPIRY_DELTA = 2048;

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bdk_flutter/bdk_flutter.dart';
+import 'package:ldk_node/ldk_node.dart' as ldk_node;
 import 'package:bitcoin_ui_kit/bitcoin_ui_kit.dart';
 import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -106,11 +107,12 @@ class CreateWalletScreen extends ConsumerWidget {
                   disabled: switchOneState == false || switchTwoState == false
                       ? true
                       : false,
-                  onPressed: () {
-                    Mnemonic.create(WordCount.Words12).then((mnemonic) {
-                      final keydata = KeyData(mnemonic.asString());
+                  onPressed: () async {
+                    ldk_node.generateEntropyMnemonic().then((mnemonic) async {
+                      final keydata = KeyData(mnemonic.toString());
                       saveKeyData(keydata);
-                      ldkNodeManager.start(mnemonic.asString());
+                      bool started = await ldkNodeManager.start(mnemonic);
+                      Navigator.pop(context);
                     });
                   },
                 ),
