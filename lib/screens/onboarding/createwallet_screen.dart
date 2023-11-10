@@ -40,7 +40,7 @@ class CreateWalletScreen extends ConsumerWidget {
                 const Spacer(),
                 Image(
                     image: const AssetImage("icons/wallet.png",
-                        package: "bitcoin_ui_kit"),
+                        package: "bitcoin_ui"),
                     height: 60,
                     fit: BoxFit.fill,
                     color: Bitcoin.green),

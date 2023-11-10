@@ -22,7 +22,7 @@ class StartScreen extends ConsumerWidget {
           const Spacer(),
           Image(
               image: const AssetImage("icons/bitcoin_circle.png",
-                  package: "bitcoin_ui_kit"),
+                  package: "bitcoin_ui"),
               height: 125,
               fit: BoxFit.fill,
               color: Bitcoin.orange),
