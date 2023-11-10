@@ -1,4 +1,4 @@
-import 'package:bitcoin_ui_kit/bitcoin_ui_kit.dart';
+import 'package:bitcoin_ui/bitcoin_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

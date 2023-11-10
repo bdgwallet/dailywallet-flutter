@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bitcoin_ui_kit/bitcoin_ui_kit.dart';
+import 'package:bitcoin_ui/bitcoin_ui.dart';
 import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
