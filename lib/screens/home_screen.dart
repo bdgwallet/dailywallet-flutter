@@ -20,15 +20,18 @@ class HomeScreen extends ConsumerWidget {
 
     return PlatformScaffold(
       body: tabState.tabScreen(),
+      backgroundColor: Theme.of(context).colorScheme.background,
       bottomNavBar: PlatformNavBar(
-          backgroundColor: Colors.white,
-          cupertino: (context, platform) => CupertinoTabBarData(
-              border: Border.all(width: 0, color: Colors.transparent)),
-          material: (context, platform) => MaterialNavBarData(elevation: 0.0),
           currentIndex: tabState.selectedTab,
           itemChanged: (index) {
             tabState.updateIndex(index);
           },
+          cupertino: (context, platform) => CupertinoTabBarData(
+              border: Border.all(width: 0, color: Colors.transparent)),
+          material3: (context, platform) => MaterialNavigationBarData(
+              elevation: 0,
+              backgroundColor: Theme.of(context).colorScheme.background,
+              indicatorColor: Theme.of(context).colorScheme.background),
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(BitcoinIcons.flip_vertical), label: "Payments"),

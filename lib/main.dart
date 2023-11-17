@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+import 'package:dailywallet_flutter/themes/dailywallet_themes.dart';
 import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:dailywallet_flutter/key_manager.dart';
 import 'package:dailywallet_flutter/screens/onboarding/start_screen.dart';
@@ -30,14 +31,9 @@ class DailyWalletApp extends ConsumerWidget {
           iosUsesMaterialWidgets: true,
           iosUseZeroPaddingForAppbarPlatformIcon: true),
       builder: (context) => PlatformTheme(
+        materialLightTheme: materialLightTheme(context),
         builder: (context) => PlatformApp(
-          //cupertino: (context, platform) => CupertinoAppData(),
           debugShowCheckedModeBanner: false,
-          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-            DefaultMaterialLocalizations.delegate,
-            DefaultWidgetsLocalizations.delegate,
-            DefaultCupertinoLocalizations.delegate,
-          ],
           title: 'BDG Daily Wallet',
           home: ldkNodeManager.node != null
               ? const HomeScreen()
