@@ -1,6 +1,4 @@
 PODS:
-  - bdk_flutter (0.28.3):
-    - Flutter
   - Flutter (1.0.0)
   - flutter_secure_storage (6.0.0):
     - Flutter
@@ -11,15 +9,12 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
-  - bdk_flutter (from `.symlinks/plugins/bdk_flutter/ios`)
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - ldk_node (from `.symlinks/plugins/ldk_node/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
 
 EXTERNAL SOURCES:
-  bdk_flutter:
-    :path: ".symlinks/plugins/bdk_flutter/ios"
   Flutter:
     :path: Flutter
   flutter_secure_storage:
@@ -30,11 +25,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
 
 SPEC CHECKSUMS:
-  bdk_flutter: 8f8f084899883723cec0c1c8dd858f10ce157ecc
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   ldk_node: ab40477d6647d63d24fccd3431ccc7672bf79a25
-  path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 
