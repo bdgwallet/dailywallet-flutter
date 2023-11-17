@@ -7,6 +7,7 @@ import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:dailywallet_flutter/key_manager.dart';
 import 'package:dailywallet_flutter/screens/onboarding/start_screen.dart';
 import 'package:dailywallet_flutter/screens/home_screen.dart';
+import 'package:ldk_node/ldk_node.dart';
 
 void main() {
   runApp(
@@ -47,10 +48,10 @@ class DailyWalletApp extends ConsumerWidget {
 
 Future<bool> existingWallet(WidgetRef ref) async {
   final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
-  await deleteKeyData();
+  //await deleteKeyData();
   try {
     await getKeyData().then((keydata) async {
-      //ldkNodeManager.start(keydata.mnemonic);
+      ldkNodeManager.start(Mnemonic(internal: keydata.mnemonic));
     });
     return true;
   } catch (error) {

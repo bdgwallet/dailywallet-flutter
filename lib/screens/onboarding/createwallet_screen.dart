@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bdk_flutter/bdk_flutter.dart';
-import 'package:ldk_node/ldk_node.dart' as ldk_node;
+import 'package:ldk_node/ldk_node.dart';
 import 'package:bitcoin_ui/bitcoin_ui.dart';
 import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -108,8 +107,8 @@ class CreateWalletScreen extends ConsumerWidget {
                       ? true
                       : false,
                   onPressed: () async {
-                    ldk_node.generateEntropyMnemonic().then((mnemonic) async {
-                      final keydata = KeyData(mnemonic.toString());
+                    generateEntropyMnemonic().then((mnemonic) async {
+                      final keydata = KeyData(mnemonic.internal);
                       saveKeyData(keydata);
                       bool started = await ldkNodeManager.start(mnemonic);
                       Navigator.pop(context);
