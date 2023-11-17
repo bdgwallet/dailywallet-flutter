@@ -2,11 +2,23 @@ import 'package:bitcoin_ui/bitcoin_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-//import 'package:dailywallet_flutter/themes/bitcoin_ui.dart';
+ThemeData materialLightTheme(context) {
+  return ThemeData(
+    colorScheme: lightThemeColors(context),
+    textTheme: lightThemeText(context),
+    scaffoldBackgroundColor: lightThemeColors(context).background,
+    appBarTheme: appBarTheme(context),
+  );
+}
+
+CupertinoThemeData cupertinoLightTheme(context) {
+  return MaterialBasedCupertinoThemeData(
+      materialTheme: materialLightTheme(context));
+}
 
 ColorScheme lightThemeColors(context) {
   return ColorScheme(
-      brightness: Brightness.dark,
+      brightness: Brightness.light,
       primary: Bitcoin.orange,
       onPrimary: Bitcoin.white,
       secondary: Bitcoin.neutral2,
@@ -37,7 +49,7 @@ TextTheme lightThemeText(context) {
     bodyMedium: BitcoinTextStyle.body2(textColor),
     bodySmall: BitcoinTextStyle.body4(textColor),
     labelLarge: BitcoinTextStyle.body4(textColor),
-    labelMedium: BitcoinTextStyle.body5(textColor), // BottomNavigationBar
+    labelMedium: BitcoinTextStyle.body5(textColor), // NavigationBarItem.label
     labelSmall: BitcoinTextStyle.body5(textColor),
   );
 }
@@ -46,18 +58,5 @@ appBarTheme(context) {
   return AppBarTheme(
     backgroundColor: Color(0xFF000000), //lightThemeColors(context).background,
     titleTextStyle: lightThemeText(context).headlineSmall,
-  );
-}
-
-ThemeData materialLightTheme(context) {
-  return ThemeData(
-    colorScheme: lightThemeColors(context),
-    textTheme: lightThemeText(context),
-    scaffoldBackgroundColor: lightThemeColors(context).background,
-    appBarTheme: appBarTheme(context),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.blue,
-        unselectedItemColor: Colors.red),
   );
 }

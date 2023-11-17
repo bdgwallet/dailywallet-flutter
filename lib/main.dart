@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +30,9 @@ class DailyWalletApp extends ConsumerWidget {
           iosUsesMaterialWidgets: true,
           iosUseZeroPaddingForAppbarPlatformIcon: true),
       builder: (context) => PlatformTheme(
+        themeMode: ThemeMode.system,
         materialLightTheme: materialLightTheme(context),
+        cupertinoLightTheme: cupertinoLightTheme(context),
         builder: (context) => PlatformApp(
           debugShowCheckedModeBanner: false,
           title: 'BDG Daily Wallet',
