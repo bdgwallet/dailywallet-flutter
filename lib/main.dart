@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -24,6 +25,17 @@ class DailyWalletApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
+
+    // Set statusbar colors correctly
+    if (Theme.of(context).brightness == Brightness.dark) {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Theme.of(context).colorScheme.background,
+      ));
+    } else {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Theme.of(context).colorScheme.background,
+      ));
+    }
 
     return PlatformProvider(
       settings: PlatformSettingsData(
@@ -57,7 +69,7 @@ class DailyWalletApp extends ConsumerWidget {
 
 Future<bool> existingWallet(WidgetRef ref) async {
   final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
-  //await deleteKeyData();
+  await deleteKeyData();
   try {
     await getKeyData().then((keydata) async {
       ldkNodeManager.start(Mnemonic(internal: keydata.mnemonic));

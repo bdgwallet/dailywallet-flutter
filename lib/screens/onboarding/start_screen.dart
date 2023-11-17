@@ -1,3 +1,4 @@
+import 'package:dailywallet_flutter/themes/dailywallet_themes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitcoin_ui/bitcoin_ui.dart';
@@ -13,11 +14,9 @@ class StartScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
-
     return PlatformScaffold(
         body: Container(
-            margin: const EdgeInsets.fromLTRB(32, 64, 32, 32),
+            margin: platformInsets(InsetSize.large),
             child: Center(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -28,19 +27,22 @@ class StartScreen extends ConsumerWidget {
                           package: "bitcoin_ui"),
                       height: 125,
                       fit: BoxFit.fill,
-                      color: Bitcoin.orange),
+                      color: Theme.of(context).colorScheme.primary),
                   const SizedBox(height: 16),
-                  Text("Bitcoin Wallet",
-                      style: BitcoinTextStyle.title1(Bitcoin.black)),
+                  Text("Bitcoin wallet",
+                      style: Theme.of(context).textTheme.headlineMedium),
                   const SizedBox(height: 16),
                   Text(
-                    "A simple bitcoin wallet for your enjoyment",
+                    "A simple bitcoin wallet\nfor daily use",
                     style: BitcoinTextStyle.body1(Bitcoin.neutral7),
                     textAlign: TextAlign.center,
                   ),
                   const Spacer(),
                   BitcoinButtonFilled(
                     title: "Create wallet",
+                    tintColor: Theme.of(context).colorScheme.primary,
+                    height: 64,
+                    cornerRadius: 32,
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -52,6 +54,8 @@ class StartScreen extends ConsumerWidget {
                   const SizedBox(height: 16),
                   BitcoinButtonPlain(
                     title: "Restore wallet",
+                    height: 64,
+                    cornerRadius: 32,
                     onPressed: () {
                       Navigator.push(
                           context,
