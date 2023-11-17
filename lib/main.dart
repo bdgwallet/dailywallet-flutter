@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,25 +25,36 @@ class DailyWalletApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
 
-    return PlatformApp(
-        debugShowCheckedModeBanner: false,
-        material: (context, platform) => MaterialAppData(),
-        cupertino: (context, platform) => CupertinoAppData(),
-        home: PlatformScaffold(
-            body: ldkNodeManager.node != null
-                ? const HomeScreen()
-                : FutureBuilder(
-                    future: existingWallet(ref),
-                    builder: ((context, snapshot) {
-                      if (snapshot.hasData) {
-                        return snapshot.data == true
-                            ? const HomeScreen()
-                            : const StartScreen();
-                      } else {
-                        return Center(
-                            child: PlatformCircularProgressIndicator());
-                      }
-                    }))));
+    return PlatformProvider(
+      settings: PlatformSettingsData(
+          iosUsesMaterialWidgets: true,
+          iosUseZeroPaddingForAppbarPlatformIcon: true),
+      builder: (context) => PlatformTheme(
+        builder: (context) => PlatformApp(
+          //cupertino: (context, platform) => CupertinoAppData(),
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+            DefaultMaterialLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+            DefaultCupertinoLocalizations.delegate,
+          ],
+          title: 'BDG Daily Wallet',
+          home: ldkNodeManager.node != null
+              ? const HomeScreen()
+              : FutureBuilder(
+                  future: existingWallet(ref),
+                  builder: ((context, snapshot) {
+                    if (snapshot.hasData) {
+                      return snapshot.data == true
+                          ? const HomeScreen()
+                          : const StartScreen();
+                    } else {
+                      return Center(child: PlatformCircularProgressIndicator());
+                    }
+                  })),
+        ),
+      ),
+    );
   }
 }
 
