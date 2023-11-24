@@ -1,3 +1,4 @@
+import 'package:dailywallet_flutter/themes/dailywallet_themes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,21 +32,21 @@ class CreateWalletScreen extends ConsumerWidget {
               elevation: 0.1,
               leading: BackButton(color: Bitcoin.black)))),
       body: Container(
-          margin: const EdgeInsets.fromLTRB(32, 64, 32, 32),
+          margin: platformInsets(InsetSize.large),
           child: Center(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                const Spacer(),
+                //const Spacer(),
                 Image(
                     image: const AssetImage("icons/wallet.png",
                         package: "bitcoin_ui"),
                     height: 60,
                     fit: BoxFit.fill,
-                    color: Bitcoin.green),
+                    color: Theme.of(context).colorScheme.primary),
                 const SizedBox(height: 16),
                 Text("Two things you\nmust understand",
-                    style: BitcoinTextStyle.title2(Bitcoin.black),
+                    style: Theme.of(context).textTheme.headlineSmall,
                     textAlign: TextAlign.center),
                 const Spacer(),
                 Padding(
@@ -58,14 +59,14 @@ class CreateWalletScreen extends ConsumerWidget {
                           Flexible(
                             child: Text(
                               "With bitcoin, you are your own bank. No on else has access to your private keys.",
-                              style: BitcoinTextStyle.body3(Bitcoin.neutral7),
+                              style: Theme.of(context).textTheme.bodySmall,
                               textAlign: TextAlign.left,
                               maxLines: 5,
                             ),
                           ),
                           const SizedBox(width: 8),
                           PlatformSwitch(
-                            activeColor: Bitcoin.green,
+                            activeColor: Theme.of(context).colorScheme.primary,
                             value: switchOneState,
                             onChanged: (value) {
                               ref.read(switchOneStateProvider.notifier).state =
@@ -81,14 +82,14 @@ class CreateWalletScreen extends ConsumerWidget {
                           Flexible(
                             child: Text(
                               "If you lose access to this app, and the backup we will help you create, your bitcoin cannot be recovered.",
-                              style: BitcoinTextStyle.body3(Bitcoin.neutral7),
+                              style: Theme.of(context).textTheme.bodySmall,
                               textAlign: TextAlign.left,
                               maxLines: 5,
                             ),
                           ),
                           const SizedBox(width: 8),
                           PlatformSwitch(
-                            activeColor: Bitcoin.green,
+                            activeColor: Theme.of(context).colorScheme.primary,
                             value: switchTwoState,
                             onChanged: (value) {
                               ref.read(switchTwoStateProvider.notifier).state =
@@ -103,6 +104,7 @@ class CreateWalletScreen extends ConsumerWidget {
                 const Spacer(),
                 BitcoinButtonFilled(
                   title: "Continue",
+                  height: 64,
                   disabled: switchOneState == false || switchTwoState == false
                       ? true
                       : false,
@@ -118,6 +120,7 @@ class CreateWalletScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 BitcoinButtonPlain(
                   title: "Advanced settings",
+                  height: 64,
                   onPressed: () {
                     // TODO: Advanced settings
                     debugPrint("Advanced settings: Not yet implemented");

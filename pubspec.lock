@@ -54,10 +54,10 @@ packages:
     dependency: "direct main"
     description:
       name: bitcoin_ui
-      sha256: "5545c4b80dd309b229b9ce1705156eecb0ee8c15103ad1b478cea416a95c647f"
+      sha256: "96e1da9a577b7fd9968593bbdd5844295a4fde1e4de31424fd292491e648b6a8"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.5"
+    version: "2.0.0"
   boolean_selector:
     dependency: transitive
     description:

@@ -25,7 +25,7 @@ class StartScreen extends ConsumerWidget {
                   Image(
                       image: const AssetImage("icons/bitcoin_circle.png",
                           package: "bitcoin_ui"),
-                      height: 125,
+                      height: 60,
                       fit: BoxFit.fill,
                       color: Theme.of(context).colorScheme.primary),
                   const SizedBox(height: 16),
@@ -34,15 +34,16 @@ class StartScreen extends ConsumerWidget {
                   const SizedBox(height: 16),
                   Text(
                     "A simple bitcoin wallet\nfor daily use",
-                    style: BitcoinTextStyle.body1(Bitcoin.neutral7),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(color: Bitcoin.neutral7),
                     textAlign: TextAlign.center,
                   ),
                   const Spacer(),
                   BitcoinButtonFilled(
                     title: "Create wallet",
-                    tintColor: Theme.of(context).colorScheme.primary,
                     height: 64,
-                    cornerRadius: 32,
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -55,7 +56,6 @@ class StartScreen extends ConsumerWidget {
                   BitcoinButtonPlain(
                     title: "Restore wallet",
                     height: 64,
-                    cornerRadius: 32,
                     onPressed: () {
                       Navigator.push(
                           context,

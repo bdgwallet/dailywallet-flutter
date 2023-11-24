@@ -15,7 +15,7 @@ dependencies:
     git:
       url: https://github.com/danielnordh/bitcoin_icons.git
       ref: patch-1
-  bitcoin_ui: ^1.0.5
+  bitcoin_ui: ^2.0.0
   cupertino_icons: ^1.0.2
   flutter_platform_widgets: ^6.0.2
   flutter_riverpod: ^2.1.3

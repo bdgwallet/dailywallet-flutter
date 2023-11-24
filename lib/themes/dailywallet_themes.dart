@@ -49,7 +49,7 @@ TextTheme lightThemeText(context) {
     titleSmall: BitcoinTextStyle.title5(textColor),
     bodyLarge: BitcoinTextStyle.body1(textColor),
     bodyMedium: BitcoinTextStyle.body2(textColor),
-    bodySmall: BitcoinTextStyle.body4(textColor),
+    bodySmall: BitcoinTextStyle.body3(textColor),
     labelLarge: BitcoinTextStyle.body4(textColor),
     labelMedium: BitcoinTextStyle.body5(textColor), // NavigationBarItem.label
     labelSmall: BitcoinTextStyle.body5(textColor),
