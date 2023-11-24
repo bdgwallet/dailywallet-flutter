@@ -72,7 +72,7 @@ Future<bool> existingWallet(WidgetRef ref) async {
   await deleteKeyData();
   try {
     await getKeyData().then((keydata) async {
-      ldkNodeManager.start(Mnemonic(internal: keydata.mnemonic));
+      ldkNodeManager.start(Mnemonic(Mnemonic(keydata.mnemonic)));
     });
     return true;
   } catch (error) {

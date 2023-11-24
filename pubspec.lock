@@ -53,10 +53,11 @@ packages:
   bitcoin_ui:
     dependency: "direct main"
     description:
-      name: bitcoin_ui
-      sha256: "96e1da9a577b7fd9968593bbdd5844295a4fde1e4de31424fd292491e648b6a8"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: b6758656feb2349efb07e27e08568555fca17b4f
+      resolved-ref: b6758656feb2349efb07e27e08568555fca17b4f
+      url: "https://github.com/bdgwallet/bitcoinui-flutter"
+    source: git
     version: "2.0.0"
   boolean_selector:
     dependency: transitive
@@ -122,14 +123,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  colorize:
-    dependency: transitive
-    description:
-      name: colorize
-      sha256: "584746cd6ba1cba0633b6720f494fe6f9601c4170f0666c1579d2aa2a61071ba"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   convert:
     dependency: transitive
     description:
@@ -219,10 +212,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_rust_bridge
-      sha256: "6960d0843f6f7b4eac28f2531eb0024f01c49bf9eec798327fbbafa084c1f535"
+      sha256: "7c5e94d037ccb0de7b5f7de3ff2491548d292b5aad01b01f5a5703f8aac9389b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.78.0"
+    version: "1.82.4"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -341,8 +334,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "5061c9e754247fbf1e132621f22990fd0c452b89"
-      resolved-ref: "5061c9e754247fbf1e132621f22990fd0c452b89"
+      ref: "11271b861c73a84bde87501d1db386a8107b1d1f"
+      resolved-ref: "11271b861c73a84bde87501d1db386a8107b1d1f"
       url: "https://github.com/LtbLightning/ldk-node-flutter"
     source: git
     version: "0.1.2"
@@ -575,6 +568,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -643,10 +644,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
+      sha256: df5a4d8f22ee4ccd77f8839ac7cb274ebc11ef9adcce8b92be14b797fe889921
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.7"
+    version: "4.2.1"
   vector_math:
     dependency: transitive
     description:

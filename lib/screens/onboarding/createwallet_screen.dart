@@ -37,7 +37,7 @@ class CreateWalletScreen extends ConsumerWidget {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                //const Spacer(),
+                const Spacer(),
                 Image(
                     image: const AssetImage("icons/wallet.png",
                         package: "bitcoin_ui"),
@@ -109,7 +109,7 @@ class CreateWalletScreen extends ConsumerWidget {
                       ? true
                       : false,
                   onPressed: () async {
-                    generateEntropyMnemonic().then((mnemonic) async {
+                    Mnemonic.generate().then((mnemonic) async {
                       final keydata = KeyData(mnemonic.internal);
                       saveKeyData(keydata);
                       bool started = await ldkNodeManager.start(mnemonic);

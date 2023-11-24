@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final ldkNodeManagerProvider = ChangeNotifierProvider<LDKNodeManager>((ref) {
   return LDKNodeManager(
-      ldk_node.Network.testnet); // Set to .Bitcoin or .Testnet
+      ldk_node.Network.Testnet); // Set to .Bitcoin or .Testnet
 });
 
 class LDKNodeManager extends ChangeNotifier {
@@ -26,14 +26,15 @@ class LDKNodeManager extends ChangeNotifier {
       final nodeConfig = ldk_node.Config(
           trustedPeers0Conf: [],
           storageDirPath: nodePath,
-          network: ldk_node.Network.testnet,
+          network: ldk_node.Network.Testnet,
           listeningAddress:
               const ldk_node.NetAddress.iPv4(addr: "0.0.0.0", port: 3006),
           onchainWalletSyncIntervalSecs: 60,
           walletSyncIntervalSecs: 20,
           feeRateCacheUpdateIntervalSecs: 600,
-          logLevel: ldk_node.LogLevel.debug,
-          defaultCltvExpiryDelta: 144
+          logLevel: ldk_node.LogLevel.Debug,
+          defaultCltvExpiryDelta: 144,
+          probingLiquidityLimitMultiplier: 3
           /* storageDirPath: await appDirectoryPath(),
           network: network,
           onchainWalletSyncIntervalSecs: 30,
@@ -45,12 +46,15 @@ class LDKNodeManager extends ChangeNotifier {
           );
       ldk_node.Builder builder =
           ldk_node.Builder.fromConfig(config: nodeConfig);
-      builder.setEntropyBip39Mnemonic(mnemonic: mnemonic);
-      node = await builder.build();
-      await node?.start();
-      notifyListeners();
-      sync();
-      return Future.value(true);
+      await ldk_node.Mnemonic.generate().then((mnemonic) async {
+        builder.setEntropyBip39Mnemonic(mnemonic: mnemonic);
+        node = await builder.build();
+        await node?.start();
+        notifyListeners();
+        sync();
+        return Future.value(true);
+      });
+      return Future.value(false);
     } on Exception catch (error) {
       debugPrint(error.toString());
       return Future.value(false);

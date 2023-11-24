@@ -15,7 +15,10 @@ dependencies:
     git:
       url: https://github.com/danielnordh/bitcoin_icons.git
       ref: patch-1
-  bitcoin_ui: ^2.0.0
+  bitcoin_ui:
+    git:
+      url: https://github.com/bdgwallet/bitcoinui-flutter
+      ref: b6758656feb2349efb07e27e08568555fca17b4f
   cupertino_icons: ^1.0.2
   flutter_platform_widgets: ^6.0.2
   flutter_riverpod: ^2.1.3
@@ -23,7 +26,7 @@ dependencies:
   ldk_node:
     git:
       url: https://github.com/LtbLightning/ldk-node-flutter
-      ref: 5061c9e754247fbf1e132621f22990fd0c452b89
+      ref: 11271b861c73a84bde87501d1db386a8107b1d1f
   path_provider: ^2.0.15
 
 dev_dependencies:

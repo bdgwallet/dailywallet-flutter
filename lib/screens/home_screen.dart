@@ -27,6 +27,7 @@ class HomeScreen extends ConsumerWidget {
             tabState.updateIndex(index);
           },
           cupertino: (context, platform) => CupertinoTabBarData(
+              backgroundColor: Theme.of(context).colorScheme.background,
               border: Border.all(width: 0, color: Colors.transparent)),
           material3: (context, platform) => MaterialNavigationBarData(
               elevation: 0,
