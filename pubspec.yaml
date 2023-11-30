@@ -26,7 +26,7 @@ dependencies:
   ldk_node:
     git:
       url: https://github.com/LtbLightning/ldk-node-flutter
-      ref: 11271b861c73a84bde87501d1db386a8107b1d1f
+      ref: f2b9af000eab26def20e3037d4efe1e7c04e1209
   path_provider: ^2.0.15
 
 dev_dependencies:

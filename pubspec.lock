@@ -334,11 +334,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "11271b861c73a84bde87501d1db386a8107b1d1f"
-      resolved-ref: "11271b861c73a84bde87501d1db386a8107b1d1f"
+      ref: f2b9af000eab26def20e3037d4efe1e7c04e1209
+      resolved-ref: f2b9af000eab26def20e3037d4efe1e7c04e1209
       url: "https://github.com/LtbLightning/ldk-node-flutter"
     source: git
-    version: "0.1.2"
+    version: "0.1.3"
   lints:
     dependency: transitive
     description:
