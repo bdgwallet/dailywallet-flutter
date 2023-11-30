@@ -17,17 +17,9 @@ class SettingsScreen extends ConsumerWidget {
               CupertinoNavigationBarData(backgroundColor: Colors.transparent),
           material: ((context, platform) => MaterialAppBarData(
               backgroundColor: Colors.transparent, elevation: 0.1))),
-      body: Center(
+      body: const Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text("Settings screen"),
-        Image(
-            image: const AssetImage("icons/bitcoin_circle.png",
-                package: "bitcoin_ui_kit"),
-            color: Bitcoin.orange),
-        Image(
-            image: const AssetImage("icons/lightning.png",
-                package: "bitcoin_ui_kit"),
-            color: Bitcoin.orange),
+        Text("Settings screen"),
       ])),
     );
   }

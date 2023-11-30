@@ -11,29 +11,9 @@ class ActivityScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
-    return Center(
+    return const Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      const Text("Activity screen"),
-      const SizedBox(height: 16),
-      Text("Title 1", style: BitcoinTextStyle.title1(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Title 2", style: BitcoinTextStyle.title2(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Title 3", style: BitcoinTextStyle.title3(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Title 4", style: BitcoinTextStyle.title4(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Title 5", style: BitcoinTextStyle.title5(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Body 1", style: BitcoinTextStyle.body1(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Body 2", style: BitcoinTextStyle.body2(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Body 3", style: BitcoinTextStyle.body3(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Body 4", style: BitcoinTextStyle.body4(Bitcoin.black)),
-      const SizedBox(height: 16),
-      Text("Body 5", style: BitcoinTextStyle.body5(Bitcoin.black)),
+      Text("Activity screen"),
     ]));
   }
 }
