@@ -20,8 +20,10 @@ class LDKNodeManager extends ChangeNotifier {
   }
 
   Future<bool> start(ldk_node.Mnemonic mnemonic) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final nodePath = "${directory.path}/ldk_cache/";
+    final applicationDirectory = await getApplicationDocumentsDirectory();
+    final nodePath = "${applicationDirectory.path}/ldk_cache";
+    // Warning, only use when developing
+    //deleteNodeData(nodePath);
     try {
       final nodeConfig = ldk_node.Config(
           trustedPeers0Conf: [],
@@ -46,15 +48,12 @@ class LDKNodeManager extends ChangeNotifier {
           );
       ldk_node.Builder builder =
           ldk_node.Builder.fromConfig(config: nodeConfig);
-      await ldk_node.Mnemonic.generate().then((mnemonic) async {
-        builder.setEntropyBip39Mnemonic(mnemonic: mnemonic);
-        node = await builder.build();
-        await node?.start();
-        notifyListeners();
-        sync();
-        return Future.value(true);
-      });
-      return Future.value(false);
+      builder.setEntropyBip39Mnemonic(mnemonic: mnemonic);
+      node = await builder.build();
+      await node?.start();
+      notifyListeners();
+      sync();
+      return Future.value(true);
     } on Exception catch (error) {
       debugPrint(error.toString());
       return Future.value(false);
@@ -96,3 +95,9 @@ const ELECTRUM_URL_TESTNET = "ssl://electrum.blockstream.info:60002";
 const DEFAULT_LISTENING_ADDRESS =
     ldk_node.NetAddress.iPv4(addr: "0.0.0.0", port: 3006);
 const DEFAULT_CLTV_EXPIRY_DELTA = 2048;
+
+// Helper - Delete node data, only use when developing!
+void deleteNodeData(String nodePath) {
+  final nodeDirectory = Directory(nodePath);
+  nodeDirectory.deleteSync(recursive: true);
+}
