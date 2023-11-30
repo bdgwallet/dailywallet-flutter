@@ -14,65 +14,6 @@ class TransactionScreen extends ConsumerWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Text(ldkNodeManager.syncState.toString()),
       const Text("Wallet balance"),
-      BitcoinButtonFilled(
-          title: "Filled",
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
-      const SizedBox(height: 16),
-      BitcoinButtonFilled(
-          title: "Filled disabled",
-          disabled: true,
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
-      const SizedBox(height: 16),
-      BitcoinButtonFilled(
-          title: "Filled disabled",
-          isLoading: true,
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
-      const SizedBox(height: 16),
-      BitcoinButtonOutlined(
-          title: "Outlined",
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
-      const SizedBox(height: 16),
-      BitcoinButtonOutlined(
-          title: "Filled disabled",
-          disabled: true,
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
-      const SizedBox(height: 16),
-      BitcoinButtonOutlined(
-          title: "Filled disabled",
-          isLoading: true,
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
-      const SizedBox(height: 16),
-      BitcoinButtonPlain(
-          title: "Plain",
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
-      const SizedBox(height: 16),
-      BitcoinButtonPlain(
-          title: "Outlined disabled",
-          disabled: true,
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
-      const SizedBox(height: 16),
-      BitcoinButtonPlain(
-          title: "Test",
-          isLoading: true,
-          onPressed: () {
-            debugPrint("Test button press");
-          }),
     ]));
   }
 }
