@@ -18,6 +18,7 @@ class CreateWalletScreen extends ConsumerWidget {
     final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
     final switchOneState = ref.watch(switchOneStateProvider);
     final switchTwoState = ref.watch(switchTwoStateProvider);
+    final creatingWallet = ref.watch(creatingWalletProvider);
 
     return PlatformScaffold(
       appBar: PlatformAppBar(
@@ -108,11 +109,14 @@ class CreateWalletScreen extends ConsumerWidget {
                   disabled: switchOneState == false || switchTwoState == false
                       ? true
                       : false,
+                  isLoading: creatingWallet,
                   onPressed: () async {
+                    ref.read(creatingWalletProvider.notifier).state = true;
                     Mnemonic.generate().then((mnemonic) async {
                       final keydata = KeyData(mnemonic.internal);
                       saveKeyData(keydata);
                       bool started = await ldkNodeManager.start(mnemonic);
+                      ref.read(creatingWalletProvider.notifier).state = false;
                       Navigator.pop(context);
                     });
                   },
@@ -137,5 +141,9 @@ final switchOneStateProvider = StateProvider<bool>((ref) {
 });
 
 final switchTwoStateProvider = StateProvider<bool>((ref) {
+  return false;
+});
+
+final creatingWalletProvider = StateProvider<bool>((ref) {
   return false;
 });

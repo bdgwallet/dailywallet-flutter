@@ -69,7 +69,8 @@ class DailyWalletApp extends ConsumerWidget {
 
 Future<bool> existingWallet(WidgetRef ref) async {
   final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
-  await deleteKeyData();
+  //Warning! only use when developing
+  //await deleteKeyData();
   try {
     await getKeyData().then((keydata) async {
       ldkNodeManager.start(Mnemonic(Mnemonic(keydata.mnemonic)));
