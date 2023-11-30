@@ -13,6 +13,10 @@ const defaultWalletSyncIntervalSecs = 20;
 const defaultFeeRateCacheUpdateIntervalSecs = 600;
 const defaultProbingLiquidityLimitMultiplier = 3;
 
+// Public API URLs
+const esploraUrlBitcoin = "https://blockstream.info/api/";
+const esploraUrlTestnet = "https://blockstream.info/testnet/api";
+
 final ldkNodeManagerProvider = ChangeNotifierProvider<LDKNodeManager>((ref) {
   return LDKNodeManager(Network.Testnet); // Set to .Bitcoin or .Testnet
 });
@@ -46,6 +50,10 @@ class LDKNodeManager extends ChangeNotifier {
               defaultProbingLiquidityLimitMultiplier);
       Builder builder = Builder.fromConfig(config: nodeConfig);
       builder.setEntropyBip39Mnemonic(mnemonic: mnemonic);
+      builder.setEsploraServer(
+          esploraServerUrl: network == Network.Bitcoin
+              ? esploraUrlBitcoin
+              : esploraUrlTestnet);
       node = await builder.build();
       await node?.start();
       notifyListeners();
@@ -62,7 +70,9 @@ class LDKNodeManager extends ChangeNotifier {
       syncState = SyncState.syncing;
       notifyListeners();
       try {
+        debugPrint("Sync started");
         await node?.syncWallets();
+        debugPrint("Sync finished");
         syncState = SyncState.synced;
         notifyListeners();
       } on Exception catch (error) {
