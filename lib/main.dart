@@ -71,6 +71,7 @@ Future<bool> existingWallet(WidgetRef ref) async {
   final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
   //Warning! only use when developing
   //await deleteKeyData();
+  //await ldkNodeManager.deleteNodeData();
   try {
     await getKeyData().then((keydata) async {
       ldkNodeManager.start(Mnemonic(keydata.mnemonic));

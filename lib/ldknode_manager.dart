@@ -24,7 +24,10 @@ final ldkNodeManagerProvider = ChangeNotifierProvider<LDKNodeManager>((ref) {
 class LDKNodeManager extends ChangeNotifier {
   late Network network;
   Node? node;
+  PublicKey? nodeId;
   var syncState = SyncState.empty;
+  var totalOnchainBalance = 0;
+  var lightningBalance = 0;
 
   LDKNodeManager(this.network) {
     network = network;
@@ -50,12 +53,13 @@ class LDKNodeManager extends ChangeNotifier {
               defaultProbingLiquidityLimitMultiplier);
       Builder builder = Builder.fromConfig(config: nodeConfig);
       builder.setEntropyBip39Mnemonic(mnemonic: mnemonic);
-      builder.setEsploraServer(
+      /* builder.setEsploraServer(
           esploraServerUrl: network == Network.Bitcoin
               ? esploraUrlBitcoin
-              : esploraUrlTestnet);
+              : esploraUrlTestnet); */
       node = await builder.build();
       await node?.start();
+      nodeId = await node?.nodeId();
       notifyListeners();
       sync();
       return Future.value(true);
@@ -70,10 +74,11 @@ class LDKNodeManager extends ChangeNotifier {
       syncState = SyncState.syncing;
       notifyListeners();
       try {
-        debugPrint("Sync started");
+        debugPrint("Sync started: ${DateTime.now()}");
         await node?.syncWallets();
-        debugPrint("Sync finished");
+        debugPrint("Sync finished: ${DateTime.now()}");
         syncState = SyncState.synced;
+        updateBalance();
         notifyListeners();
       } on Exception catch (error) {
         syncState = SyncState.failed;
@@ -81,6 +86,20 @@ class LDKNodeManager extends ChangeNotifier {
         debugPrint(error.toString());
       }
     }
+  }
+
+  updateBalance() async {
+    if (node != null) {
+      totalOnchainBalance = await node!.totalOnchainBalanceSats();
+      notifyListeners();
+    }
+  }
+
+  deleteNodeData() async {
+    final applicationDirectory = await getApplicationDocumentsDirectory();
+    final nodePath = "${applicationDirectory.path}/ldk_cache";
+    final nodeDirectory = Directory(nodePath);
+    nodeDirectory.deleteSync(recursive: true);
   }
 }
 
@@ -91,9 +110,4 @@ Future<String> appDirectoryPath() async {
   Directory appDocumentsDirectory =
       await getApplicationDocumentsDirectory(); // 1
   return appDocumentsDirectory.path;
-}
-
-void deleteNodeData(String nodePath) {
-  final nodeDirectory = Directory(nodePath);
-  nodeDirectory.deleteSync(recursive: true);
 }
