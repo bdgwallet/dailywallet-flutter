@@ -30,9 +30,9 @@ ColorScheme lightThemeColors(context) {
       background: Bitcoin.white,
       onBackground: Bitcoin.black,
       surface: Bitcoin.white,
-      onSurface: Bitcoin.black,
+      onSurface: Bitcoin.orange,
       onSurfaceVariant: Bitcoin.neutral5, // Unselected NavigationBarItem
-      onSecondaryContainer: Bitcoin.black); // Selected NavigationBarItem Icon
+      onSecondaryContainer: Bitcoin.orange); // Selected NavigationBarItem Icon
 }
 
 TextTheme lightThemeText(context) {
