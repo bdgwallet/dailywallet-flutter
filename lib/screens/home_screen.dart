@@ -35,9 +35,9 @@ class HomeScreen extends ConsumerWidget {
               indicatorColor: Theme.of(context).colorScheme.background),
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(BitcoinIcons.flip_vertical), label: "Payments"),
-            BottomNavigationBarItem(
                 icon: Icon(BitcoinIcons.transactions), label: "Activity"),
+            BottomNavigationBarItem(
+                icon: Icon(BitcoinIcons.flip_vertical), label: "Payments"),
             BottomNavigationBarItem(
                 icon: Icon(BitcoinIcons.gear), label: "Settings")
           ]),
@@ -60,11 +60,11 @@ class TabState extends ChangeNotifier {
   Widget tabScreen() {
     switch (selectedTab) {
       case 1:
-        return const ActivityScreen();
+        return const TransactionScreen();
       case 2:
         return const SettingsScreen();
       default:
-        return const TransactionScreen();
+        return const ActivityScreen();
     }
   }
 }
