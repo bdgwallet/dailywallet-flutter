@@ -10,6 +10,7 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ldkNodeManager = ref.watch(ldkNodeManagerProvider);
+
     return PlatformScaffold(
       appBar: PlatformAppBar(
           title: const Text("Settings"),
@@ -17,9 +18,9 @@ class SettingsScreen extends ConsumerWidget {
               CupertinoNavigationBarData(backgroundColor: Colors.transparent),
           material: ((context, platform) => MaterialAppBarData(
               backgroundColor: Colors.transparent, elevation: 0.1))),
-      body: const Center(
+      body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text("Settings screen"),
+        Text("Node ID: " + ldkNodeManager.nodeId!.internal),
       ])),
     );
   }

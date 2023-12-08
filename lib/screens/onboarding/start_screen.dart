@@ -1,11 +1,11 @@
-import 'package:dailywallet_flutter/themes/dailywallet_themes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitcoin_ui/bitcoin_ui.dart';
-import 'package:dailywallet_flutter/ldknode_manager.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:dailywallet_flutter/ldknode_manager.dart';
+import 'package:dailywallet_flutter/themes/dailywallet_themes.dart';
 import 'package:dailywallet_flutter/screens/onboarding/createwallet_screen.dart';
 import 'package:dailywallet_flutter/screens/onboarding/restorewallet_screen.dart';
 
